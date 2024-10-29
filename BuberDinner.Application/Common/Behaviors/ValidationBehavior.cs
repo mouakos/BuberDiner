@@ -10,6 +10,8 @@ public class ValidationBehavior<TRequest, TResponse>(IValidator<TRequest>? valid
     where TResponse : IErrorOr
 
 {
+    #region Public methods declaration
+
     /// <inheritdoc />
     public async Task<TResponse> Handle(TRequest request,
         RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
@@ -22,4 +24,6 @@ public class ValidationBehavior<TRequest, TResponse>(IValidator<TRequest>? valid
         var errors = validationResult.Errors.ConvertAll(x => Error.Validation(x.PropertyName, x.ErrorMessage));
         return (dynamic)errors;
     }
+
+    #endregion
 }

@@ -14,15 +14,22 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuberDinner.Contracts", "BuberDinner.Contracts\BuberDinner.Contracts.csproj", "{A09D6B32-8952-44ED-A241-04572EA2F04E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Requests", "Requests", "{4F2793DF-3122-48B8-BD9B-81D3B0212F76}"
-	ProjectSection(SolutionItems) = preProject
-		login.http = login.http
-		register.http = register.http
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{4C63D2CA-82F3-44BE-8AAF-5EDE7C828A1C}"
 	ProjectSection(SolutionItems) = preProject
 		Api.md = Api.md
 		DomainModels.md = DomainModels.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{8C3C0818-1CD0-4682-A506-7FAA73B88327}"
+	ProjectSection(SolutionItems) = preProject
+		login.http = login.http
+		register.http = register.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dinners", "Dinners", "{9E4A105B-4523-4641-96F1-0FA3B6F32951}"
+	ProjectSection(SolutionItems) = preProject
+		ListDinners.http = ListDinners.http
 	EndProjectSection
 EndProject
 Global
@@ -54,6 +61,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8C3C0818-1CD0-4682-A506-7FAA73B88327} = {4F2793DF-3122-48B8-BD9B-81D3B0212F76}
+		{9E4A105B-4523-4641-96F1-0FA3B6F32951} = {4F2793DF-3122-48B8-BD9B-81D3B0212F76}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E95A3B97-4781-4544-B8BA-4B6EC1067F13}

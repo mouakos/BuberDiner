@@ -1,9 +1,6 @@
 using BuberDiner.Api;
-using BuberDiner.Api.Common.Errors;
-using BuberDiner.Api.Common.Mapping;
 using BuberDinner.Application;
 using BuberDinner.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -24,7 +21,7 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 {
     // app.UseMiddleware<ErrorHandlingMiddleware>();
-    app.UseExceptionHandler("/Error");
+    app.UseExceptionHandler("/error");
 
     // Configure the HTTP request pipeline.
     //if (app.Environment.IsDevelopment())
@@ -35,6 +32,7 @@ var app = builder.Build();
 
     app.UseHttpsRedirection();
 
+    app.UseAuthentication();
     app.UseAuthorization();
 
     app.MapControllers();

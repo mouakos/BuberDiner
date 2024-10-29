@@ -6,6 +6,8 @@ namespace BuberDiner.Api.Common.Mapping;
 
 public static class DependencyInjection
 {
+    #region Public methods declaration
+
     public static IServiceCollection AddMapper(this IServiceCollection services)
     {
         var config = TypeAdapterConfig.GlobalSettings;
@@ -14,4 +16,6 @@ public static class DependencyInjection
         services.AddScoped<IMapper, ServiceMapper>();
         return services;
     }
+
+    #endregion
 }

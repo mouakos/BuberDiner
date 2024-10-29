@@ -4,6 +4,8 @@ namespace BuberDinner.Application.Authentication.Queries.Login;
 
 public class LoginQueryValidator : AbstractValidator<LoginQuery>
 {
+    #region Public constructors declaration
+
     public LoginQueryValidator()
     {
         RuleFor(x => x.Email)
@@ -12,4 +14,6 @@ public class LoginQueryValidator : AbstractValidator<LoginQuery>
         RuleFor(x => x.Password)
             .NotEmpty();
     }
+
+    #endregion
 }

@@ -1,11 +1,13 @@
 ﻿using BuberDiner.Api.Http;
 using ErrorOr;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace BuberDiner.Api.Controllers;
 
 [ApiController]
+[Authorize]
 public class ApiController : ControllerBase
 {
     #region Protected methods declaration
@@ -15,15 +17,16 @@ public class ApiController : ControllerBase
         if (errors.Count is 0)
             return Problem();
 
-        if (errors.All(error => error.Type == ErrorType.Validation))
-        {
-            return ValidationProblem(errors);
-        }
+        if (errors.All(error => error.Type == ErrorType.Validation)) return ValidationProblem(errors);
 
         HttpContext.Items[HttpContextItemKeys.c_Errors] = errors;
         var firstError = errors.FirstOrDefault();
         return Problem(firstError);
     }
+
+    #endregion
+
+    #region Private methods declaration
 
     private IActionResult Problem(Error error)
     {
@@ -40,10 +43,7 @@ public class ApiController : ControllerBase
     private IActionResult ValidationProblem(List<Error> errors)
     {
         var modelStateDictionary = new ModelStateDictionary();
-        foreach (var error in errors)
-        {
-            modelStateDictionary.AddModelError(error.Code, error.Description);
-        }
+        foreach (var error in errors) modelStateDictionary.AddModelError(error.Code, error.Description);
 
         return ValidationProblem(modelStateDictionary);
     }

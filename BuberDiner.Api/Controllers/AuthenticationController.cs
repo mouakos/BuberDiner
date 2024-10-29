@@ -1,14 +1,15 @@
 ﻿using BuberDinner.Application.Authentication.Commands.Register;
-using BuberDinner.Application.Authentication.Common;
 using BuberDinner.Application.Authentication.Queries.Login;
 using BuberDinner.Contracts.Authentication;
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuberDiner.Api.Controllers;
 
 [Route("auth")]
+[AllowAnonymous]
 public class AuthenticationController(ISender mediator, IMapper mapper) : ApiController
 {
     #region Public methods declaration

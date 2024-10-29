@@ -8,6 +8,8 @@ namespace BuberDiner.Api.Common.Mapping;
 
 public class AuthenticationMappingConfig : IRegister
 {
+    #region Public methods declaration
+
     /// <inheritdoc />
     public void Register(TypeAdapterConfig config)
     {
@@ -18,4 +20,6 @@ public class AuthenticationMappingConfig : IRegister
         config.NewConfig<AuthenticationResult, AuthenticationResponse>()
             .Map(dest => dest, src => src.User);
     }
+
+    #endregion
 }

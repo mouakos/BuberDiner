@@ -4,7 +4,7 @@ public class JwtSettings
 {
     #region Public constants declaration
 
-    public const string c_JwtSettings = "JwtSettings";
+    public const string c_SectionName = "JwtSettings";
 
     #endregion
 
