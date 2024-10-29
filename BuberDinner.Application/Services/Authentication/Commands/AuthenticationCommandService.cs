@@ -1,14 +1,17 @@
 ﻿using BuberDinner.Application.Common.Interfaces.Authentication;
 using BuberDinner.Application.Common.Persistence;
+using BuberDinner.Application.Services.Authentication.Common;
 using BuberDinner.Domain.Common.Errors;
 using BuberDinner.Domain.Entities;
 using ErrorOr;
 
-namespace BuberDinner.Application.Services.Authentication;
+namespace BuberDinner.Application.Services.Authentication.Commands;
 
-public class AuthenticationService(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository)
-    : IAuthenticationService
+public class AuthenticationCommandService(IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator)
+    : IAuthenticationCommandService
 {
+    #region Public methods declaration
+
     /// <inheritdoc />
     public async Task<ErrorOr<AuthenticationResult>> RegisterAsync(string fistName, string lastname,
         string email,
@@ -29,21 +32,5 @@ public class AuthenticationService(IJwtTokenGenerator jwtTokenGenerator, IUserRe
         return new AuthenticationResult(user, token);
     }
 
-    /// <inheritdoc />
-    public async Task<ErrorOr<AuthenticationResult>> LoginAsync(string email, string password)
-    {
-        // Check if user exist
-        var user = await userRepository.GetByEmailAsync(email);
-        if (user is null)
-            return Errors.Authentication.InvalidCredentials;
-
-        // Check if password is correct
-        if (user.Password != password)
-            return Errors.Authentication.InvalidCredentials;
-
-        // Create JWT token
-        var token = jwtTokenGenerator.GenerateToken(user);
-
-        return new AuthenticationResult(user, token);
-    }
+    #endregion
 }

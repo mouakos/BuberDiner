@@ -1,14 +1,16 @@
-﻿using BuberDinner.Application.Services.Authentication;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace BuberDinner.Application
+namespace BuberDinner.Application;
+
+public static class DependencyInjection
 {
-    public static class DependencyInjection
+    #region Public methods declaration
+
+    public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        public static IServiceCollection AddApplication(this IServiceCollection services)
-        {
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
-            return services;
-        }
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
+        return services;
     }
+
+    #endregion
 }

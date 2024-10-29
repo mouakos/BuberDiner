@@ -2,9 +2,18 @@
 
 public class JwtSettings
 {
+    #region Public constants declaration
+
     public const string c_JwtSettings = "JwtSettings";
-    public string? SecretKey { get; set; }
-    public string? Issuer { get; set; }
+
+    #endregion
+
+    #region Public properties declaration
+
     public string? Audience { get; set; }
     public int ExpiryMinutes { get; set; }
+    public string? Issuer { get; set; }
+    public string? SecretKey { get; set; }
+
+    #endregion
 }

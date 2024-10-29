@@ -18,6 +18,9 @@ public class BuberDinnerProblemDetailsFactory(
     private readonly Action<ProblemDetailsContext>? m_Configure = problemDetailsOptions?.Value?.CustomizeProblemDetails;
     private readonly ApiBehaviorOptions m_Options = options?.Value ?? throw new ArgumentNullException(nameof(options));
 
+    #endregion
+
+    #region Public methods declaration
 
     /// <inheritdoc />
     public override ProblemDetails CreateProblemDetails(

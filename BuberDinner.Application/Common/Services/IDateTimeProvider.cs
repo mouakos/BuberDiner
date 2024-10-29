@@ -1,7 +1,10 @@
-﻿namespace BuberDinner.Application.Common.Services
+﻿namespace BuberDinner.Application.Common.Services;
+
+public interface IDateTimeProvider
 {
-    public interface IDateTimeProvider
-    {
-        DateTime UtcNow { get; }
-    }
+    #region Public properties declaration
+
+    DateTime UtcNow { get; }
+
+    #endregion
 }

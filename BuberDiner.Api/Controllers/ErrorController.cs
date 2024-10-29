@@ -1,17 +1,20 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BuberDiner.Api.Controllers
+namespace BuberDiner.Api.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class ErrorController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ErrorController : ControllerBase
+    #region Public methods declaration
+
+    [Route("/Error")]
+    public IActionResult Error()
     {
-        [Route("/Error")]
-        public IActionResult Error()
-        {
-            var exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
-            return Problem();
-        }
+        var exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
+        return Problem();
     }
+
+    #endregion
 }

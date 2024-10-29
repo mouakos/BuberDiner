@@ -12,6 +12,8 @@ namespace BuberDinner.Infrastructure.Authentication;
 public class JwtTokenGeneration(IDateTimeProvider dateTimeProvider, IOptions<JwtSettings> jwtOptions)
     : IJwtTokenGenerator
 {
+    #region Public methods declaration
+
     /// <inheritdoc />
     public string GenerateToken(User user)
     {
@@ -29,7 +31,7 @@ public class JwtTokenGeneration(IDateTimeProvider dateTimeProvider, IOptions<Jwt
         };
 
         var securityToken = new JwtSecurityToken(
-            issuer: jwtOptions.Value.Issuer!,
+            jwtOptions.Value.Issuer!,
             expires: dateTimeProvider.UtcNow.AddMinutes(jwtOptions.Value.ExpiryMinutes),
             claims: claims,
             audience: jwtOptions.Value.Audience!,
@@ -38,4 +40,6 @@ public class JwtTokenGeneration(IDateTimeProvider dateTimeProvider, IOptions<Jwt
 
         return new JwtSecurityTokenHandler().WriteToken(securityToken);
     }
+
+    #endregion
 }
