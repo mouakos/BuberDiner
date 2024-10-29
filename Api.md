@@ -66,3 +66,5 @@ POST {{host}}/auth/login
 }
 ```
 
+## Dinner
+
