@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BuberDiner.Api.Filters;
 
