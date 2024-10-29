@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Text.Json;
 
-namespace BuberDiner.Api.Middleware;
+namespace BuberDiner.Api.Common.Middleware;
 
 public class ErrorHandlingMiddleware(RequestDelegate requestDelegate)
 {
