@@ -91,12 +91,11 @@ public class BuberDinnerProblemDetailsFactory(
             problemDetails.Type ??= clientErrorData.Link;
         }
 
-        var traceId = Activity.Current?.Id ?? httpContext?.TraceIdentifier;
-        if (traceId != null) problemDetails.Extensions["traceId"] = traceId;
-
-
         if (httpContext?.Items[HttpContextItemKeys.c_Errors] is List<Error> errors)
             problemDetails.Extensions.Add("errorCodes", errors.Select(e => e.Code));
+
+        var traceId = Activity.Current?.Id ?? httpContext?.TraceIdentifier;
+        if (traceId != null) problemDetails.Extensions["traceId"] = traceId;
 
         m_Configure?.Invoke(new ProblemDetailsContext { HttpContext = httpContext!, ProblemDetails = problemDetails });
     }
