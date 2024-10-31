@@ -15,8 +15,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Bill\ValueObjects\" />
     <Folder Include="Common\Models\" />
-    <Folder Include="Entities\" />
+    <Folder Include="Dinner\Enums\" />
+    <Folder Include="Guest\ValueObjects\" />
+    <Folder Include="User\ValueObjects\" />
   </ItemGroup>
 
   <ItemGroup>

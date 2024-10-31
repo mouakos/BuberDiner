@@ -2,26 +2,7 @@
 
 public abstract class ValueObject : IEquatable<ValueObject>
 {
-    public abstract IEnumerable<object> GetEqualityComponents();
-
-    /// <inheritdoc />
-    public bool Equals(ValueObject? other)
-    {
-        return Equals((object?)other);
-    }
-
-    /// <inheritdoc />
-    public override bool Equals(object? obj)
-    {
-        if (obj is null || obj.GetType() != GetType())
-        {
-            return false;
-        }
-
-        var valueObject = (ValueObject)obj;
-
-        return GetEqualityComponents().SequenceEqual(valueObject.GetEqualityComponents());
-    }
+    #region Public methods declaration
 
     public static bool operator ==(ValueObject left, ValueObject right)
     {
@@ -33,10 +14,30 @@ public abstract class ValueObject : IEquatable<ValueObject>
         return !Equals(left, right);
     }
 
+    /// <inheritdoc />
+    public bool Equals(ValueObject? other)
+    {
+        return Equals((object?)other);
+    }
+
+    /// <inheritdoc />
+    public override bool Equals(object? obj)
+    {
+        if (obj is null || obj.GetType() != GetType()) return false;
+
+        var valueObject = (ValueObject)obj;
+
+        return GetEqualityComponents().SequenceEqual(valueObject.GetEqualityComponents());
+    }
+
+    public abstract IEnumerable<object> GetEqualityComponents();
+
     public override int GetHashCode()
     {
         return GetEqualityComponents()
             .Select(x => x.GetHashCode())
             .Aggregate((x, y) => x ^ y);
     }
+
+    #endregion
 }
