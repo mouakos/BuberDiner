@@ -1,19 +1,40 @@
-# Domain Models
+# Create Menu
 
-## Menu
+## Create Menu 
 
-````csharp
-public class Menu
+```
+POST /hosts/{hostId}/menus
+```
+
+### Create Menu Request
+
+```json
 {
-	Menu Create();
-    void AddDinner(Dinner dinner);
-    void RemoveDinner(Dinner dinner);
-    void UpdateSection(MenuSection section);
-    // TODO: Add remaining methods
+  "name": "Yummy Menu",
+  "description": "A menu with yummy food",
+  "Sections":[
+	{
+	  "name": "Appetizers",
+	  "description": "Starters",
+	  "Items":[
+		{
+		  "name": "Fried Pikles",
+		  "description": "Deep fried pickles",
+		}
+	  ]
+	}
+  ]
 }
-````
+```
 
-````json
+### Create Menu Response
+
+```js
+
+200 OK
+```
+
+```json
 {
 	id": { "value": "00000000-0000-0000-0000-000000000000" },
     "name": "Yummy Menu",
@@ -43,5 +64,4 @@ public class Menu
     "createdDateTime": "2020-01-01T00:00:00.0000000Z",
     "updatedDateTime": "2020-01-01T00:00:00.0000000Z"
 }
-
-````
+```

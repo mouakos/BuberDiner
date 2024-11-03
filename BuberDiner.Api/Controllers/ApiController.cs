@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace BuberDiner.Api.Controllers;
 
 [ApiController]
-[Authorize]
+//[Authorize]
 public class ApiController : ControllerBase
 {
     #region Protected methods declaration

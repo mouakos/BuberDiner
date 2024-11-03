@@ -1,39 +1,35 @@
 ﻿using BuberDinner.Domain.Common.Models;
 
-namespace BuberDinner.Domain.Common.ValueObjects;
+namespace BuberDinner.Domain.HostAggregate.ValueObjects;
 
-public class Price : ValueObject
+public sealed class HostId : ValueObject
 {
     #region Private constructors declaration
 
-    private Price(decimal value, string currency)
+    private HostId(Guid value)
     {
         Value = value;
-        Currency = currency;
     }
 
     #endregion
 
     #region Public properties declaration
 
-    public string Currency { get; }
-
-    public decimal Value { get; }
+    public Guid Value { get; }
 
     #endregion
 
     #region Public methods declaration
 
-    public static Price Create(decimal value, string currency)
+    public static HostId CreateUnique()
     {
-        return new Price(value, currency);
+        return new HostId(Guid.NewGuid());
     }
 
     /// <inheritdoc />
     public override IEnumerable<object> GetEqualityComponents()
     {
         yield return Value;
-        yield return Currency;
     }
 
     #endregion

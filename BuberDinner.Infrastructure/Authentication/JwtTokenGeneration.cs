@@ -1,45 +1,48 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using BuberDinner.Application.Common.Interfaces.Authentication;
+﻿using BuberDinner.Application.Common.Interfaces.Authentication;
 using BuberDinner.Application.Common.Services;
-using BuberDinner.Domain.User;
+using BuberDinner.Domain.UserAggregate;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
-namespace BuberDinner.Infrastructure.Authentication;
-
-public class JwtTokenGeneration(IDateTimeProvider dateTimeProvider, IOptions<JwtSettings> jwtOptions)
-    : IJwtTokenGenerator
+namespace BuberDinner.Infrastructure.Authentication
 {
-    #region Public methods declaration
-
-    /// <inheritdoc />
-    public string GenerateToken(User user)
+    public class JwtTokenGeneration(
+        IDateTimeProvider dateTimeProvider,
+        IOptions<JwtSettings> jwtOptions)
+        : IJwtTokenGenerator
     {
-        var signingCredentials = new SigningCredentials(
-            new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(jwtOptions.Value.SecretKey!)),
-            SecurityAlgorithms.HmacSha256);
+        #region Public methods declaration
 
-        var claims = new[]
+        /// <inheritdoc />
+        public string GenerateToken(User user)
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()!),
-            new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
-            new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-        };
+            SigningCredentials signingCredentials = new(
+                new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(jwtOptions.Value.SecretKey!)),
+                SecurityAlgorithms.HmacSha256);
 
-        var securityToken = new JwtSecurityToken(
-            jwtOptions.Value.Issuer!,
-            expires: dateTimeProvider.UtcNow.AddMinutes(jwtOptions.Value.ExpiryMinutes),
-            claims: claims,
-            audience: jwtOptions.Value.Audience!,
-            signingCredentials: signingCredentials
-        );
+            Claim[] claims =
+            [
+                new(JwtRegisteredClaimNames.Sub, user.Id.ToString()!),
+                new(JwtRegisteredClaimNames.GivenName, user.FirstName),
+                new(JwtRegisteredClaimNames.FamilyName, user.LastName),
+                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            ];
 
-        return new JwtSecurityTokenHandler().WriteToken(securityToken);
+            JwtSecurityToken securityToken = new(
+                jwtOptions.Value.Issuer!,
+                expires: dateTimeProvider.UtcNow.AddMinutes(jwtOptions.Value.ExpiryMinutes),
+                claims: claims,
+                audience: jwtOptions.Value.Audience!,
+                signingCredentials: signingCredentials
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(securityToken);
+        }
+
+        #endregion
     }
-
-    #endregion
 }
