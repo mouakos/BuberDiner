@@ -9,11 +9,10 @@ namespace BuberDinner.Domain.GuestAggregate.Entities
 {
     public class GuestRating : Entity<GuestRatingId>
     {
-        public HostId HostId { get; private set; }
-        public DinnerId DinnerId { get; private set; }
-        public Rating Rating { get; private set; }
-        public DateTime CreatedDateTime { get; private set; }
-        public DateTime UpdatedDateTime { get; private set; }
+        #region Private constructors declaration
+
+        // ReSharper disable once UnusedMember.Local
+        private GuestRating() { }
 
         private GuestRating(DinnerId dinnerId, HostId hostId, Rating rating)
             : base(GuestRatingId.CreateUnique())
@@ -23,11 +22,27 @@ namespace BuberDinner.Domain.GuestAggregate.Entities
             Rating = rating;
         }
 
+        #endregion
+
+        #region Public properties declaration
+
+        public DateTime CreatedDateTime { get; private set; }
+        public DateTime UpdatedDateTime { get; private set; }
+        public DinnerId DinnerId { get; private set; } = null!;
+        public HostId HostId { get; private set; } = null!;
+        public Rating Rating { get; private set; } = null!;
+
+        #endregion
+
+        #region Public methods declaration
+
         public static ErrorOr<GuestRating> Create(DinnerId dinnerId, HostId hostId, int rating)
         {
-            var ratingValueObject = Rating.Create(rating);
+            Rating ratingValueObject = Rating.Create(rating);
 
             return new GuestRating(dinnerId, hostId, ratingValueObject);
         }
+
+        #endregion
     }
 }

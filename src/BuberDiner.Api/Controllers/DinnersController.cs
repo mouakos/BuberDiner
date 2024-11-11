@@ -1,17 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace BuberDiner.Api.Controllers;
-
-[Route("[controller]")]
-public class DinnersController : ApiController
+namespace BuberDiner.Api.Controllers
 {
-    #region Public methods declaration
-
-    [HttpGet]
-    public IActionResult Get()
+    [Route("[controller]")]
+    public class DinnersController : ApiController
     {
-        return Ok(Array.Empty<string>());
-    }
+        #region Public methods declaration
 
-    #endregion
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(Array.Empty<string>());
+        }
+
+        #endregion
+    }
 }

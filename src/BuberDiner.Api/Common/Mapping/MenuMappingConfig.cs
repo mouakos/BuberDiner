@@ -9,6 +9,8 @@ namespace BuberDiner.Api.Common.Mapping
 {
     public class MenuMappingConfig : IRegister
     {
+        #region Public methods declaration
+
         /// <inheritdoc />
         public void Register(TypeAdapterConfig config)
         {
@@ -21,7 +23,7 @@ namespace BuberDiner.Api.Common.Mapping
                 .Map(dest => dest.AverageRating, src => src.AverageRating.Value)
                 .Map(dest => dest.HostId, src => src.HostId.Value)
                 .Map(dest => dest.DinnerIds, src => src.DinnerIds.Select(dinnerId => dinnerId.Value))
-                .Map(dest => dest.ReviewIds, src => src.ReviewIds.Select(menuId => menuId.Value));
+                .Map(dest => dest.ReviewIds, src => src.MenuReviewIds.Select(menuId => menuId.Value));
 
             config.NewConfig<MenuSection, MenuSectionResponse>()
                 .Map(dest => dest.Id, src => src.Id.Value);
@@ -29,5 +31,7 @@ namespace BuberDiner.Api.Common.Mapping
             config.NewConfig<MenuItem, MenuItemResponse>()
                 .Map(dest => dest.Id, src => src.Id.Value);
         }
+
+        #endregion
     }
 }

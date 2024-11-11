@@ -1,29 +1,38 @@
 ﻿using ErrorOr;
 using FluentValidation;
+using FluentValidation.Results;
 using MediatR;
 
-namespace BuberDinner.Application.Common.Behaviors;
-
-public class ValidationBehavior<TRequest, TResponse>(IValidator<TRequest>? validator)
-    : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IRequest<TResponse>
-    where TResponse : IErrorOr
-
+namespace BuberDinner.Application.Common.Behaviors
 {
-    #region Public methods declaration
+    public class ValidationBehavior<TRequest, TResponse>(IValidator<TRequest>? validator)
+        : IPipelineBehavior<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>
+        where TResponse : IErrorOr
 
-    /// <inheritdoc />
-    public async Task<TResponse> Handle(TRequest request,
-        RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        if (validator is null)
-            return await next();
+        #region Public methods declaration
 
-        var validationResult = await validator.ValidateAsync(request, cancellationToken);
-        if (validationResult.IsValid) return await next();
-        var errors = validationResult.Errors.ConvertAll(x => Error.Validation(x.PropertyName, x.ErrorMessage));
-        return (dynamic)errors;
+        /// <inheritdoc />
+        public async Task<TResponse> Handle(TRequest request,
+            RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+        {
+            if (validator is null)
+            {
+                return await next();
+            }
+
+            ValidationResult? validationResult = await validator.ValidateAsync(request, cancellationToken);
+            if (validationResult.IsValid)
+            {
+                return await next();
+            }
+
+            List<Error> errors =
+                validationResult.Errors.ConvertAll(x => Error.Validation(x.PropertyName, x.ErrorMessage));
+            return (dynamic)errors;
+        }
+
+        #endregion
     }
-
-    #endregion
 }

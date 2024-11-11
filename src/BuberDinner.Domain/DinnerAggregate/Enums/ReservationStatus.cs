@@ -1,8 +1,15 @@
-﻿namespace BuberDinner.Domain.DinnerAggregate.Enums;
+﻿using Ardalis.SmartEnum;
 
-public enum ReservationStatus
+namespace BuberDinner.Domain.DinnerAggregate.Enums
 {
-    ReservationStatus,
-    Reserved,
-    Cancelled
+    public sealed class ReservationStatus(string name, int value) : SmartEnum<ReservationStatus>(name, value)
+    {
+        #region Public fields declaration
+
+        public static readonly ReservationStatus Cancelled = new(nameof(Cancelled), 3);
+        public static readonly ReservationStatus PendingGuestApproval = new(nameof(PendingGuestApproval), 1);
+        public static readonly ReservationStatus Reserved = new(nameof(Reserved), 2);
+
+        #endregion
+    }
 }

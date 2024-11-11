@@ -5,31 +5,36 @@ using BuberDinner.Domain.MenuAggregate.Entities;
 using ErrorOr;
 using MediatR;
 
-namespace BuberDinner.Application.Menus.Commands.CreateMenu;
-
-public class CreateMenuCommandHandler(IMenuRepository menuRepository)
-    : IRequestHandler<CreateMenuCommand, ErrorOr<Menu>>
+namespace BuberDinner.Application.Menus.Commands.CreateMenu
 {
-    /// <inheritdoc />
-    public async Task<ErrorOr<Menu>> Handle(CreateMenuCommand command,
-        CancellationToken cancellationToken)
+    public class CreateMenuCommandHandler(IMenuRepository menuRepository)
+        : IRequestHandler<CreateMenuCommand, ErrorOr<Menu>>
     {
-        // Create the menu
-        var menu = Menu.Create(
-            hostId: HostId.CreateUnique(),
-            name: command.Name,
-            description: command.Description,
-            sections: command.Sections.ConvertAll(section => MenuSection.Create(
-                section.Name,
-                section.Description,
-                section.Items.ConvertAll(item => MenuItem.Create(
-                    item.Name,
-                    item.Description)))));
+        #region Public methods declaration
 
-        // Save the menu
-        await menuRepository.AddSync(menu);
+        /// <inheritdoc />
+        public async Task<ErrorOr<Menu>> Handle(CreateMenuCommand command,
+            CancellationToken cancellationToken)
+        {
+            // Create the menu
+            Menu menu = Menu.Create(
+                hostId: HostId.CreateUnique(),
+                name: command.Name,
+                description: command.Description,
+                sections: command.Sections.ConvertAll(section => MenuSection.Create(
+                    section.Name,
+                    section.Description,
+                    section.Items.ConvertAll(item => MenuItem.Create(
+                        item.Name,
+                        item.Description)))));
 
-        // Return the menu
-        return menu;
+            // Save the menu
+            await menuRepository.AddSync(menu);
+
+            // Return the menu
+            return menu;
+        }
+
+        #endregion
     }
 }

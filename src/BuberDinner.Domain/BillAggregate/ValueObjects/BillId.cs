@@ -1,35 +1,26 @@
-﻿using BuberDinner.Domain.Common.Models;
+﻿using BuberDinner.Domain.Common.Models.Identities;
 
-namespace BuberDinner.Domain.BillAggregate.ValueObjects;
-
-public sealed class BillId : ValueObject
+namespace BuberDinner.Domain.BillAggregate.ValueObjects
 {
-    #region Private constructors declaration
-
-    private BillId(Guid value)
+    public sealed class BillId(Guid value) : AggregateRootId<Guid>(value)
     {
-        Value = value;
+        #region Public methods declaration
+
+        public static BillId Create(Guid guid)
+        {
+            return new BillId(guid);
+        }
+
+        public static BillId CreateUnique()
+        {
+            return new BillId(Guid.NewGuid());
+        }
+
+        public override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Value;
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Public properties declaration
-
-    public Guid Value { get; }
-
-    #endregion
-
-    #region Public methods declaration
-
-    public static BillId CreateUnique()
-    {
-        return new BillId(Guid.NewGuid());
-    }
-
-    public override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return Value;
-    }
-
-    #endregion
 }

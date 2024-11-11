@@ -3,45 +3,28 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Requests", "Requests", "{4F2793DF-3122-48B8-BD9B-81D3B0212F76}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{4C63D2CA-82F3-44BE-8AAF-5EDE7C828A1C}"
 	ProjectSection(SolutionItems) = preProject
-		Api.Auth.md = Api.Auth.md
-		Api.Menu.md = Api.Menu.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{8C3C0818-1CD0-4682-A506-7FAA73B88327}"
-	ProjectSection(SolutionItems) = preProject
-		login.http = login.http
-		register.http = register.http
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dinners", "Dinners", "{9E4A105B-4523-4641-96F1-0FA3B6F32951}"
-	ProjectSection(SolutionItems) = preProject
-		ListDinners.http = ListDinners.http
+		Docs\Api.Auth.md = Docs\Api.Auth.md
+		..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Docs\Api\Api.Dinner.md = ..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Docs\Api\Api.Dinner.md
+		Docs\Api.Menu.md = Docs\Api.Menu.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DomainModels", "DomainModels", "{7731818B-A502-44C2-B8FE-A3909DC1E8AF}"
 	ProjectSection(SolutionItems) = preProject
-		Aggregates.Bill.md = Aggregates.Bill.md
-		Aggregates.Dinner.md = Aggregates.Dinner.md
-		Aggregates.Guest.md = Aggregates.Guest.md
-		Aggregates.Host.md = Aggregates.Host.md
-		Aggregates.Menu.md = Aggregates.Menu.md
-		Aggregates.MenuReview.md = Aggregates.MenuReview.md
-		Aggregates.User.md = Aggregates.User.md
+		..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Docs\DomainModels\Aggregates.Bill.md = ..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Docs\DomainModels\Aggregates.Bill.md
+		..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Docs\DomainModels\Aggregates.Dinner.md = ..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Docs\DomainModels\Aggregates.Dinner.md
+		..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Docs\DomainModels\Aggregates.Guest.md = ..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Docs\DomainModels\Aggregates.Guest.md
+		..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Docs\DomainModels\Aggregates.Host.md = ..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Docs\DomainModels\Aggregates.Host.md
+		..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Docs\DomainModels\Aggregates.Menu.md = ..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Docs\DomainModels\Aggregates.Menu.md
+		..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Docs\DomainModels\Aggregates.MenuReview.md = ..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Docs\DomainModels\Aggregates.MenuReview.md
+		..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Docs\DomainModels\Aggregates.User.md = ..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Docs\DomainModels\Aggregates.User.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{C458F725-F225-42E5-B056-9A32B0DB9895}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		Directory.build.Props = Directory.build.Props
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Menus", "Menus", "{CF50FBFC-F7A6-4754-888A-9D86FF863D33}"
-	ProjectSection(SolutionItems) = preProject
-		CreateMenu.http = CreateMenu.http
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2B98E242-208A-4E21-912E-6F0A19650B66}"
@@ -55,6 +38,24 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuberDinner.Domain", "src\BuberDinner.Domain\BuberDinner.Domain.csproj", "{9913B6A6-3F23-441A-AB92-64663B7D04FC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuberDinner.Infrastructure", "src\BuberDinner.Infrastructure\BuberDinner.Infrastructure.csproj", "{C894DE62-3926-4039-855B-D76B9D391294}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "requests", "requests", "{69678E9F-BDA8-4F22-A001-4974E97AE8DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dinners", "dinners", "{7164D99B-5AEE-4E9F-ACE0-A950998FB5A8}"
+	ProjectSection(SolutionItems) = preProject
+		Requests\Dinners\ListDinners.http = Requests\Dinners\ListDinners.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "menus", "menus", "{0C3FC7F1-88C4-480A-B82A-E2A6B190F7BD}"
+	ProjectSection(SolutionItems) = preProject
+		Requests\Menus\CreateMenu.http = Requests\Menus\CreateMenu.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "authentication", "authentication", "{5AE481CA-4621-44AF-8BD4-C6D26C086612}"
+	ProjectSection(SolutionItems) = preProject
+		Requests\Authentication\login.http = Requests\Authentication\login.http
+		Requests\Authentication\register.http = Requests\Authentication\register.http
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,15 +88,15 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{8C3C0818-1CD0-4682-A506-7FAA73B88327} = {4F2793DF-3122-48B8-BD9B-81D3B0212F76}
-		{9E4A105B-4523-4641-96F1-0FA3B6F32951} = {4F2793DF-3122-48B8-BD9B-81D3B0212F76}
 		{7731818B-A502-44C2-B8FE-A3909DC1E8AF} = {4C63D2CA-82F3-44BE-8AAF-5EDE7C828A1C}
-		{CF50FBFC-F7A6-4754-888A-9D86FF863D33} = {4F2793DF-3122-48B8-BD9B-81D3B0212F76}
 		{8EC229E0-B911-418D-908C-472D7DE56B0B} = {2B98E242-208A-4E21-912E-6F0A19650B66}
 		{BCCB4BD1-27AD-48EA-80D5-098172007627} = {2B98E242-208A-4E21-912E-6F0A19650B66}
 		{97C85011-C8A0-4957-9D9C-D97A2E395D53} = {2B98E242-208A-4E21-912E-6F0A19650B66}
 		{9913B6A6-3F23-441A-AB92-64663B7D04FC} = {2B98E242-208A-4E21-912E-6F0A19650B66}
 		{C894DE62-3926-4039-855B-D76B9D391294} = {2B98E242-208A-4E21-912E-6F0A19650B66}
+		{7164D99B-5AEE-4E9F-ACE0-A950998FB5A8} = {69678E9F-BDA8-4F22-A001-4974E97AE8DC}
+		{0C3FC7F1-88C4-480A-B82A-E2A6B190F7BD} = {69678E9F-BDA8-4F22-A001-4974E97AE8DC}
+		{5AE481CA-4621-44AF-8BD4-C6D26C086612} = {69678E9F-BDA8-4F22-A001-4974E97AE8DC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E95A3B97-4781-4544-B8BA-4B6EC1067F13}

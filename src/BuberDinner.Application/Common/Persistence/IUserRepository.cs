@@ -1,13 +1,14 @@
 ﻿using BuberDinner.Domain.UserAggregate;
 
-namespace BuberDinner.Application.Common.Persistence;
-
-public interface IUserRepository
+namespace BuberDinner.Application.Common.Persistence
 {
-    #region Public methods declaration
+    public interface IUserRepository
+    {
+        #region Public methods declaration
 
-    Task AddAsync(User user);
-    Task<User?> GetByEmailAsync(string email);
+        Task AddAsync(User user);
+        Task<User?> GetByEmailAsync(string email);
 
-    #endregion
+        #endregion
+    }
 }

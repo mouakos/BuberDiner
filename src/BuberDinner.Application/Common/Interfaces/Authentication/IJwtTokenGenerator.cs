@@ -1,12 +1,13 @@
 ﻿using BuberDinner.Domain.UserAggregate;
 
-namespace BuberDinner.Application.Common.Interfaces.Authentication;
-
-public interface IJwtTokenGenerator
+namespace BuberDinner.Application.Common.Interfaces.Authentication
 {
-    #region Public methods declaration
+    public interface IJwtTokenGenerator
+    {
+        #region Public methods declaration
 
-    string GenerateToken(User user);
+        string GenerateToken(User user);
 
-    #endregion
+        #endregion
+    }
 }

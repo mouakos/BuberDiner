@@ -1,36 +1,27 @@
-﻿using BuberDinner.Domain.Common.Models;
+﻿using BuberDinner.Domain.Common.Models.Identities;
 
-namespace BuberDinner.Domain.MenuAggregate.ValueObjects;
-
-public sealed class MenuItemId : ValueObject
+namespace BuberDinner.Domain.MenuAggregate.ValueObjects
 {
-    #region Private constructors declaration
-
-    private MenuItemId(Guid value)
+    public sealed class MenuItemId(Guid value) : AggregateRootId<Guid>(value)
     {
-        Value = value;
+        #region Public methods declaration
+
+        public static MenuItemId Create(Guid guid)
+        {
+            return new MenuItemId(guid);
+        }
+
+        public static MenuItemId CreateUnique()
+        {
+            return new MenuItemId(Guid.NewGuid());
+        }
+
+        /// <inheritdoc />
+        public override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Value;
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Public properties declaration
-
-    public Guid Value { get; }
-
-    #endregion
-
-    #region Public methods declaration
-
-    public static MenuItemId CreateUnique()
-    {
-        return new MenuItemId(Guid.NewGuid());
-    }
-
-    /// <inheritdoc />
-    public override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return Value;
-    }
-
-    #endregion
 }

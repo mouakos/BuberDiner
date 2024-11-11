@@ -2,7 +2,7 @@ using BuberDiner.Api;
 using BuberDinner.Application;
 using BuberDinner.Infrastructure;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 {
     // Add services to the container.
     //builder.Services.AddDbContext<BuberDinerDbContext>(options =>
@@ -18,7 +18,7 @@ var builder = WebApplication.CreateBuilder(args);
 }
 
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 {
     // app.UseMiddleware<ErrorHandlingMiddleware>();
     app.UseExceptionHandler("/error");

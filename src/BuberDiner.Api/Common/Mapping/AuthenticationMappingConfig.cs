@@ -4,22 +4,23 @@ using BuberDinner.Application.Authentication.Queries.Login;
 using BuberDinner.Contracts.Authentication;
 using Mapster;
 
-namespace BuberDiner.Api.Common.Mapping;
-
-public class AuthenticationMappingConfig : IRegister
+namespace BuberDiner.Api.Common.Mapping
 {
-    #region Public methods declaration
-
-    /// <inheritdoc />
-    public void Register(TypeAdapterConfig config)
+    public class AuthenticationMappingConfig : IRegister
     {
-        config.NewConfig<LoginRequest, LoginQuery>();
+        #region Public methods declaration
 
-        config.NewConfig<RegisterRequest, RegisterCommand>();
+        /// <inheritdoc />
+        public void Register(TypeAdapterConfig config)
+        {
+            config.NewConfig<LoginRequest, LoginQuery>();
 
-        config.NewConfig<AuthenticationResult, AuthenticationResponse>()
-            .Map(dest => dest, src => src.User);
+            config.NewConfig<RegisterRequest, RegisterCommand>();
+
+            config.NewConfig<AuthenticationResult, AuthenticationResponse>()
+                .Map(dest => dest, src => src.User);
+        }
+
+        #endregion
     }
-
-    #endregion
 }

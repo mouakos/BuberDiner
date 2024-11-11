@@ -1,22 +1,19 @@
-﻿using System.Reflection;
-using BuberDinner.Application.Common.Behaviors;
-using FluentValidation;
-using MediatR;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace BuberDinner.Application;
-
-public static class DependencyInjection
+namespace BuberDinner.Application
 {
-    #region Public methods declaration
-
-    public static IServiceCollection AddApplication(this IServiceCollection services)
+    public static class DependencyInjection
     {
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
-        //services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-        //services.AddValidatorsFromAssemblies([Assembly.GetExecutingAssembly()]);
-        return services;
-    }
+        #region Public methods declaration
 
-    #endregion
+        public static IServiceCollection AddApplication(this IServiceCollection services)
+        {
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
+            //services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            //services.AddValidatorsFromAssemblies([Assembly.GetExecutingAssembly()]);
+            return services;
+        }
+
+        #endregion
+    }
 }

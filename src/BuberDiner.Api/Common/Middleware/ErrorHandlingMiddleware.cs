@@ -1,38 +1,39 @@
 ﻿using System.Net;
 using System.Text.Json;
 
-namespace BuberDiner.Api.Common.Middleware;
-
-public class ErrorHandlingMiddleware(RequestDelegate requestDelegate)
+namespace BuberDiner.Api.Common.Middleware
 {
-    #region Public methods declaration
-
-    public async Task InvokeAsync(HttpContext httpContext)
+    public class ErrorHandlingMiddleware(RequestDelegate requestDelegate)
     {
-        try
+        #region Public methods declaration
+
+        public async Task InvokeAsync(HttpContext httpContext)
         {
-            await requestDelegate(httpContext);
+            try
+            {
+                await requestDelegate(httpContext);
+            }
+            catch (Exception e)
+            {
+                // Log error
+                await HandleExceptionAsync(httpContext, e);
+            }
         }
-        catch (Exception e)
+
+        #endregion
+
+        #region Private methods declaration
+
+        private static async Task HandleExceptionAsync(HttpContext httpContext, Exception e)
         {
-            // Log error
-            await HandleExceptionAsync(httpContext, e);
+            httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            httpContext.Response.ContentType = "application/json";
+
+            string result = JsonSerializer.Serialize(new { error = "An error occured while processing request." });
+
+            await httpContext.Response.WriteAsync(result);
         }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Private methods declaration
-
-    private static async Task HandleExceptionAsync(HttpContext httpContext, Exception e)
-    {
-        httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-        httpContext.Response.ContentType = "application/json";
-
-        var result = JsonSerializer.Serialize(new { error = "An error occured while processing request." });
-
-        await httpContext.Response.WriteAsync(result);
-    }
-
-    #endregion
 }

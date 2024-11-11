@@ -1,13 +1,18 @@
-﻿namespace BuberDinner.Domain.Common.Models;
-
-public abstract class AggregateRoot<TId> : Entity<TId> where TId : notnull
+﻿namespace BuberDinner.Domain.Common.Models
 {
-    #region Protected constructors declaration
-
-    protected AggregateRoot(TId id) : base(id)
+    public abstract class AggregateRoot<TId> : Entity<TId> where TId : notnull
     {
-        Id = id;
-    }
+        #region Protected constructors declaration
 
-    #endregion
+        protected AggregateRoot(TId id) : base(id)
+        {
+            Id = id;
+        }
+
+        protected AggregateRoot()
+        {
+        }
+
+        #endregion
+    }
 }

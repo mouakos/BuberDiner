@@ -6,37 +6,34 @@ using BuberDinner.Domain.UserAggregate;
 using ErrorOr;
 using MediatR;
 
-namespace BuberDinner.Application.Authentication.Commands.Register;
-
-public class RegisterCommandHandler(IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator)
-    : IRequestHandler<RegisterCommand, ErrorOr<AuthenticationResult>>
+namespace BuberDinner.Application.Authentication.Commands.Register
 {
-    #region Public methods declaration
-
-    /// <inheritdoc />
-    public async Task<ErrorOr<AuthenticationResult>> Handle(RegisterCommand command,
-        CancellationToken cancellationToken)
+    public class RegisterCommandHandler(IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator)
+        : IRequestHandler<RegisterCommand, ErrorOr<AuthenticationResult>>
     {
-        // Check if user already exist
-        if (await userRepository.GetByEmailAsync(command.Email) is not null)
-            return Errors.User.DuplicateEmail;
+        #region Public methods declaration
 
-        // Create user (generate unique ID)
-        User user = new User
+        /// <inheritdoc />
+        public async Task<ErrorOr<AuthenticationResult>> Handle(RegisterCommand command,
+            CancellationToken cancellationToken)
         {
-            FirstName = command.FirstName,
-            LastName = command.LastName,
-            Email = command.Email,
-            Password = command.Password
-        };
-        await userRepository.AddAsync(user);
+            // Check if user already exist
+            if (await userRepository.GetByEmailAsync(command.Email) is not null)
+            {
+                return Errors.User.DuplicateEmail;
+            }
+
+            // Create user (generate unique ID)
+            User user = User.Create(command.Email, command.FirstName, command.LastName, command.Password);
+            await userRepository.AddAsync(user);
 
 
-        // Create JWT token
-        string token = jwtTokenGenerator.GenerateToken(user);
+            // Create JWT token
+            string token = jwtTokenGenerator.GenerateToken(user);
 
-        return new AuthenticationResult(user, token);
+            return new AuthenticationResult(user, token);
+        }
+
+        #endregion
     }
-
-    #endregion
 }

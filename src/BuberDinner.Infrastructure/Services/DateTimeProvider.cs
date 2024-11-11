@@ -1,13 +1,14 @@
 ﻿using BuberDinner.Application.Common.Services;
 
-namespace BuberDinner.Infrastructure.Services;
-
-public class DateTimeProvider : IDateTimeProvider
+namespace BuberDinner.Infrastructure.Services
 {
-    #region Public properties declaration
+    public class DateTimeProvider : IDateTimeProvider
+    {
+        #region Public properties declaration
 
-    /// <inheritdoc />
-    public DateTime UtcNow => DateTime.UtcNow;
+        /// <inheritdoc />
+        public DateTime UtcNow => DateTime.UtcNow;
 
-    #endregion
+        #endregion
+    }
 }

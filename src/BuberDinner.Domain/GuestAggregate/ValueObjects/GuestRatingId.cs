@@ -1,12 +1,14 @@
-﻿using BuberDinner.Domain.Common.Models;
+﻿using BuberDinner.Domain.Common.Models.Identities;
 
 namespace BuberDinner.Domain.GuestAggregate.ValueObjects
 {
-    public class GuestRatingId : ValueObject
+    public class GuestRatingId(Guid value) : AggregateRootId<Guid>(value)
     {
-        private GuestRatingId(Guid value)
+        #region Public methods declaration
+
+        public static GuestRatingId Create(Guid value)
         {
-            Value = value;
+            return new GuestRatingId(value);
         }
 
         public static GuestRatingId CreateUnique()
@@ -14,16 +16,11 @@ namespace BuberDinner.Domain.GuestAggregate.ValueObjects
             return new GuestRatingId(Guid.NewGuid());
         }
 
-        public Guid Value { get; }
-
-        public static GuestRatingId Create(Guid value)
-        {
-            return new GuestRatingId(value);
-        }
-
         public override IEnumerable<object> GetEqualityComponents()
         {
             yield return Value;
         }
+
+        #endregion
     }
 }

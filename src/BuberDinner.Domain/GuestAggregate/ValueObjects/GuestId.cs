@@ -1,35 +1,26 @@
-﻿using BuberDinner.Domain.Common.Models;
+﻿using BuberDinner.Domain.Common.Models.Identities;
 
-namespace BuberDinner.Domain.GuestAggregate.ValueObjects;
-
-public class GuestId : ValueObject
+namespace BuberDinner.Domain.GuestAggregate.ValueObjects
 {
-    #region Private constructors declaration
-
-    private GuestId(Guid value)
+    public class GuestId(Guid value) : AggregateRootId<Guid>(value)
     {
-        Value = value;
+        #region Public methods declaration
+
+        public static GuestId Create(Guid guid)
+        {
+            return new GuestId(guid);
+        }
+
+        public static GuestId CreateUnique()
+        {
+            return new GuestId(Guid.NewGuid());
+        }
+
+        public override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Value;
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Public properties declaration
-
-    public Guid Value { get; }
-
-    #endregion
-
-    #region Public methods declaration
-
-    public static GuestId CreateUnique()
-    {
-        return new GuestId(Guid.NewGuid());
-    }
-
-    public override IEnumerable<object> GetEqualityComponents()
-    {
-        yield return Value;
-    }
-
-    #endregion
 }

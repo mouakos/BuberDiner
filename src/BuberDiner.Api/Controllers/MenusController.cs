@@ -11,6 +11,8 @@ namespace BuberDiner.Api.Controllers
     [Route("hosts/{hostId}/menus")]
     public class MenusController(IMapper mapper, ISender mediator) : ApiController
     {
+        #region Public methods declaration
+
         [HttpPost]
         public async Task<IActionResult> CreateMenuAsync([FromRoute] string hostId,
             [FromBody] CreateMenuRequest request)
@@ -23,5 +25,7 @@ namespace BuberDiner.Api.Controllers
                 Problem
             );
         }
+
+        #endregion
     }
 }

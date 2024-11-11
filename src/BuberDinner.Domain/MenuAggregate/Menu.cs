@@ -6,74 +6,70 @@ using BuberDinner.Domain.MenuAggregate.Entities;
 using BuberDinner.Domain.MenuAggregate.ValueObjects;
 using BuberDinner.Domain.MenuReviewAggregate.ValueObjects;
 
-namespace BuberDinner.Domain.MenuAggregate;
-
-public sealed class Menu : AggregateRoot<MenuId>
+namespace BuberDinner.Domain.MenuAggregate
 {
-    #region Private fields declaration
-
-    private readonly List<DinnerId> m_DinnerIds = new();
-    private readonly List<MenuReviewId> m_ReviewIds = new();
-    private readonly List<MenuSection> m_Sections = new();
-
-    #endregion
-
-    #region Private constructors declaration
-
-    private Menu(
-        MenuId menuId,
-        string name,
-        string description,
-        AverageRating averageRating,
-        HostId hostId,
-        DateTime createdDateTime,
-        DateTime updatedDateTime,
-        List<MenuSection> sections)
-        : base(menuId)
+    public sealed class Menu : AggregateRoot<MenuId>
     {
-        Name = name;
-        Description = description;
-        AverageRating = averageRating;
-        HostId = hostId;
-        CreatedDateTime = createdDateTime;
-        UpdatedDateTime = updatedDateTime;
-        m_Sections = sections;
+        #region Private fields declaration
+
+        private readonly List<DinnerId> m_DinnerIds = new();
+        private readonly List<MenuReviewId> m_MenuReviewIds = new();
+        private readonly List<MenuSection> m_Sections = new();
+
+        #endregion
+
+        #region Private constructors declaration
+
+        // ReSharper disable once UnusedMember.Local
+        private Menu() { }
+
+        private Menu(
+            HostId hostId,
+            string name,
+            string description,
+            AverageRating averageRating,
+            List<MenuSection> sections)
+            : base(MenuId.CreateUnique())
+        {
+            HostId = hostId;
+            Name = name;
+            Description = description;
+            AverageRating = averageRating;
+            m_Sections = sections;
+        }
+
+        #endregion
+
+        #region Public properties declaration
+
+        public AverageRating AverageRating { get; private set; } = null!;
+        public DateTime CreatedDateTime { get; private set; }
+        public string Description { get; private set; } = null!;
+        public IReadOnlyList<DinnerId> DinnerIds => m_DinnerIds.AsReadOnly();
+        public HostId HostId { get; private set; } = null!;
+        public IReadOnlyList<MenuReviewId> MenuReviewIds => m_MenuReviewIds.AsReadOnly();
+        public string Name { get; private set; } = null!;
+        public IReadOnlyList<MenuSection> Sections => m_Sections.AsReadOnly();
+        public DateTime UpdatedDateTime { get; private set; }
+
+        #endregion
+
+        #region Public methods declaration
+
+        public static Menu Create(
+            HostId hostId,
+            string name,
+            string description,
+            List<MenuSection>? sections = null)
+        {
+            return new Menu(
+                hostId,
+                name,
+                description,
+                AverageRating.Create(),
+                sections ?? new List<MenuSection>());
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Public properties declaration
-
-    public AverageRating AverageRating { get; }
-    public DateTime CreatedDateTime { get; }
-    public string Description { get; }
-    public IReadOnlyList<DinnerId> DinnerIds => m_DinnerIds.AsReadOnly();
-    public HostId HostId { get; }
-    public IReadOnlyList<MenuReviewId> ReviewIds => m_ReviewIds.AsReadOnly();
-    public IReadOnlyList<MenuSection> Sections => m_Sections.AsReadOnly();
-    public string Name { get; }
-    public DateTime UpdatedDateTime { get; }
-
-    #endregion
-
-    #region Public methods declaration
-
-    public static Menu Create(
-        string name,
-        string description,
-        HostId hostId,
-        List<MenuSection> sections)
-    {
-        return new Menu(
-            MenuId.CreateUnique(),
-            name,
-            description,
-            AverageRating.Create(),
-            hostId,
-            DateTime.UtcNow,
-            DateTime.UtcNow,
-            sections);
-    }
-
-    #endregion
 }
