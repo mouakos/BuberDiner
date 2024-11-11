@@ -6,17 +6,17 @@ public sealed class AverageRating : ValueObject
 {
     #region Private constructors declaration
 
-    private AverageRating(double value, int numRating)
+    private AverageRating(double value, int numRatings)
     {
         Value = value;
-        NumRating = numRating;
+        NumRatings = numRatings;
     }
 
     #endregion
 
     #region Public properties declaration
 
-    public int NumRating { get; }
+    public int NumRatings { get; private set; }
 
     public double Value { get; private set; }
 
@@ -31,19 +31,19 @@ public sealed class AverageRating : ValueObject
 
     public void AddNewRating(Rating rating)
     {
-        Value = (Value * NumRating + rating.Value) / (NumRating + 1);
+        Value = (Value * NumRatings + rating.Value) / ++NumRatings;
     }
 
     /// <inheritdoc />
     public override IEnumerable<object> GetEqualityComponents()
     {
         yield return Value;
-        yield return NumRating;
+        yield return NumRatings;
     }
 
     public void RemoveRating(Rating rating)
     {
-        Value = (Value * NumRating - rating.Value) / (NumRating - 1);
+        Value = (Value * NumRatings - rating.Value) / --NumRatings;
     }
 
     #endregion

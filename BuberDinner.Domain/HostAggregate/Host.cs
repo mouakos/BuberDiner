@@ -19,23 +19,18 @@ public sealed class Host : AggregateRoot<HostId>
     #region Private constructors declaration
 
     private Host(
-        HostId hostId,
         string firstName,
         string lastName,
-        string profilImage,
+        Uri profileImage,
         AverageRating averageRating,
-        UserId userId,
-        DateTime createdDateTime,
-        DateTime updatedDateTime)
-        : base(hostId)
+        UserId userId)
+        : base(HostId.CreateUnique())
     {
         FirstName = firstName;
         LastName = lastName;
-        ProfilImage = profilImage;
-        AverageRating = averageRating;
+        ProfileImage = profileImage;
         UserId = userId;
-        CreatedDateTime = createdDateTime;
-        UpdatedDateTime = updatedDateTime;
+        AverageRating = averageRating;
     }
 
     #endregion
@@ -45,11 +40,9 @@ public sealed class Host : AggregateRoot<HostId>
     public IReadOnlyList<DinnerId> DinnerIds => m_DinnerIds.AsReadOnly();
     public IReadOnlyList<MenuId> MenuIds => m_MenuIds.AsReadOnly();
     public AverageRating AverageRating { get; private set; }
-    public DateTime CreatedDateTime { get; private set; }
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
-    public string ProfilImage { get; private set; }
-    public DateTime UpdatedDateTime { get; private set; }
+    public Uri ProfileImage { get; private set; }
     public UserId UserId { get; private set; }
 
     #endregion
@@ -59,20 +52,17 @@ public sealed class Host : AggregateRoot<HostId>
     public static Host Create(
         string firstName,
         string lastName,
-        string profilImage,
-        AverageRating averageRating,
-        UserId userId
+        Uri profileImage,
+        UserId userId,
+        AverageRating averageRating
     )
     {
         return new Host(
-            HostId.CreateUnique(),
             firstName,
             lastName,
-            profilImage,
+            profileImage,
             averageRating,
-            userId,
-            DateTime.UtcNow,
-            DateTime.UtcNow
+            userId
         );
     }
 

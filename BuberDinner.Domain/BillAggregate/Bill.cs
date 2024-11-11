@@ -12,14 +12,13 @@ public class Bill : AggregateRoot<BillId>
     #region Private constructors declaration
 
     private Bill(
-        BillId billId,
         DinnerId dinnerId,
+        GuestId guestId,
         HostId hostId,
         Price price,
-        GuestId guestId,
         DateTime createdDateTime,
         DateTime updatedDateTime)
-        : base(billId)
+        : base(BillId.CreateUnique())
     {
         DinnerId = dinnerId;
         HostId = hostId;
@@ -46,18 +45,19 @@ public class Bill : AggregateRoot<BillId>
 
     public static Bill Create(
         DinnerId dinnerId,
+        GuestId guestId,
         HostId hostId,
         Price price,
-        GuestId guestId)
+        DateTime createdDateTime,
+        DateTime updatedDateTime)
     {
         return new Bill(
-            BillId.CreateUnique(),
             dinnerId,
+            guestId,
             hostId,
             price,
-            guestId,
-            DateTime.UtcNow,
-            DateTime.UtcNow);
+            createdDateTime,
+            updatedDateTime);
     }
 
     #endregion

@@ -8,21 +8,16 @@ public sealed class ApplicationUser : AggregateRoot<UserId>
     #region Private constructors declaration
 
     private ApplicationUser(
-        UserId userId,
         string firstName,
         string lastName,
         string email,
-        string password,
-        DateTime createdDateTime,
-        DateTime updatedDateTime)
-        : base(userId)
+        string password)
+        : base(UserId.CreateUnique())
     {
-        Email = email;
         FirstName = firstName;
         LastName = lastName;
+        Email = email;
         Password = password;
-        CreatedDateTime = createdDateTime;
-        UpdatedDateTime = updatedDateTime;
     }
 
     #endregion
@@ -48,13 +43,10 @@ public sealed class ApplicationUser : AggregateRoot<UserId>
         string password)
     {
         return new ApplicationUser(
-            UserId.CreateUnique(),
             firstName,
             lastName,
             email,
-            password,
-            DateTime.UtcNow,
-            DateTime.UtcNow);
+            password);
     }
 
     #endregion

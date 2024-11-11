@@ -1,22 +1,30 @@
-
 # Buber Dinner API
 
-## Authentication
+- [Buber Dinner API](#buber-dinner-api)
+  - [Auth](#auth)
+    - [Register](#register)
+      - [Register Request](#register-request)
+      - [Register Response](#register-response)
+    - [Login](#login)
+      - [Login Request](#login-request)
+      - [Login Response](#login-response)
+
+## Auth
 
 ### Register
 
-```
+#### Register Request
+
+```js
 POST /auth/register
 ```
 
-#### Register Request
-
 ```json
 {
-  "lastName": "admin",
-  "firstName": "admin",
-  "password": "admin",
-  "email": "admin@admin.com"
+    "firstName": "Amichai",
+    "lastName": "Mantinband",
+    "email": "amichai@mantinband.com",
+    "password": "Amiko1232!"
 }
 ```
 
@@ -28,43 +36,41 @@ POST /auth/register
 
 ```json
 {
-  "lastName": "admin",
-  "firstName": "admin",
-  "password": "admin",
-  "email": "admin@admin.com"
-  "token": "eyJhb.z9qdajXiV"
+  "id": "d89c2d9a-eb3e-4075-95ff-b920b55aa104",
+  "firstName": "Amichai",
+  "lastName": "Mantinband",
+  "email": "amichai@mantinband.com",
+  "token": "eyJhb..z9dqcnXoY"
 }
 ```
 
 ### Login
 
-```
-POST {{host}}/auth/login
-```
-
 #### Login Request
+
+```js
+POST /auth/login
+```
 
 ```json
 {
-  "email": "admin@admin.com",
-  "password": "admin"
+    "email": "amichai@mantinband.com",
+    "password": "Amiko1232!"
 }
 ```
-
-#### Login Response
 
 ```js
 200 OK
 ```
 
+#### Login Response
+
 ```json
 {
-  "lastName": "admin",
-  "firstName": "admin",
-  "email": "admin@admin.com"
-  "token": "eyJhb.z9qdajXiV"
+  "id": "d89c2d9a-eb3e-4075-95ff-b920b55aa104",
+  "firstName": "Amichai",
+  "lastName": "Mantinband",
+  "email": "amichai@mantinband.com",
+  "token": "eyJhb..hbbQ"
 }
 ```
-
-## Dinner
-

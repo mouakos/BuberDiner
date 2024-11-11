@@ -6,7 +6,7 @@ public sealed class Rating : ValueObject
 {
     #region Private constructors declaration
 
-    private Rating(double value)
+    private Rating(int value)
     {
         Value = value;
     }
@@ -15,13 +15,13 @@ public sealed class Rating : ValueObject
 
     #region Public properties declaration
 
-    public double Value { get; }
+    public int Value { get; }
 
     #endregion
 
     #region Public methods declaration
 
-    public static Rating Create(double value)
+    public static Rating Create(int value)
     {
         return new Rating(value);
     }

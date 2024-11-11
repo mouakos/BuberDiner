@@ -13,16 +13,13 @@ public class MenuReview : AggregateRoot<MenuReviewId>
     #region Private constructors declaration
 
     private MenuReview(
-        MenuReviewId menuReviewId,
         Rating rating,
         string comment,
         HostId hostId,
         MenuId menuId,
         GuestId guestId,
-        DinnerId dinnerId,
-        DateTime createdDateTime,
-        DateTime updatedDateTime)
-        : base(menuReviewId)
+        DinnerId dinnerId)
+        : base(MenuReviewId.CreateUnique())
     {
         Rating = rating;
         Comment = comment;
@@ -30,44 +27,39 @@ public class MenuReview : AggregateRoot<MenuReviewId>
         MenuId = menuId;
         GuestId = guestId;
         DinnerId = dinnerId;
-        CreatedDateTime = createdDateTime;
-        UpdatedDateTime = updatedDateTime;
     }
 
     #endregion
 
     #region Public properties declaration
 
+    public Rating Rating { get; private set; }
     public string Comment { get; private set; }
-    public DateTime CreatedDateTime { get; private set; }
-    public DinnerId DinnerId { get; private set; }
-    public GuestId GuestId { get; private set; }
     public HostId HostId { get; private set; }
     public MenuId MenuId { get; private set; }
-    public Rating Rating { get; private set; }
-    public DateTime UpdatedDateTime { get; private set; }
+    public GuestId GuestId { get; private set; }
+    public DinnerId DinnerId { get; private set; }
 
     #endregion
 
     #region Public methods declaration
 
-    public static MenuReview Create(Rating rating,
+    public static MenuReview Create(
+        int rating,
         string comment,
         HostId hostId,
         MenuId menuId,
         GuestId guestId,
         DinnerId dinnerId)
     {
+        var ratingValueObject = Rating.Create(rating);
         return new MenuReview(
-            MenuReviewId.CreateUnique(),
-            rating,
+            ratingValueObject,
             comment,
             hostId,
             menuId,
             guestId,
-            dinnerId,
-            DateTime.UtcNow,
-            DateTime.UtcNow
+            dinnerId
         );
     }
 

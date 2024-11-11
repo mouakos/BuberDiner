@@ -10,50 +10,50 @@ public class Reservation : Entity<ReservationId>
 {
     #region Private constructors declaration
 
-    private Reservation(ReservationId reservationId, int guestCount,
-        ReservationStatus reservationStatus,
-        GuestId guestId, BillId billId,
+    private Reservation(
+        GuestId guestId,
+        int guestCount,
         DateTime? arrivalDateTime,
-        DateTime createdDateTime,
-        DateTime updatedDateTime) : base(reservationId)
+        BillId? billId,
+        ReservationStatus status) : base(ReservationId.CreateUnique())
     {
-        GuestCount = guestCount;
-        ReservationStatus = reservationStatus;
         GuestId = guestId;
-        BillId = billId;
+        GuestCount = guestCount;
         ArrivalDateTime = arrivalDateTime;
-        CreatedDateTime = createdDateTime;
-        UpdatedDateTime = updatedDateTime;
+        BillId = billId;
+        Status = status;
     }
 
     #endregion
 
     #region Public properties declaration
 
-    public DateTime? ArrivalDateTime { get; private set; }
-    public BillId BillId { get; private set; }
-    public DateTime CreatedDateTime { get; private set; }
     public int GuestCount { get; private set; }
     public GuestId GuestId { get; private set; }
-    public ReservationStatus ReservationStatus { get; private set; }
+    public BillId? BillId { get; private set; }
+    public ReservationStatus Status { get; private set; }
+    public DateTime? ArrivalDateTime { get; private set; }
+    public DateTime CreatedDateTime { get; private set; }
     public DateTime UpdatedDateTime { get; private set; }
 
     #endregion
 
     #region Public methods declaration
 
-    public static Reservation Create(int guestCount,
-        ReservationStatus reservationStatus,
-        GuestId guestId, BillId billId,
-        DateTime? arrivalDateTime)
+    public static Reservation Create(
+        GuestId guestId,
+        int guestCount,
+        ReservationStatus status,
+        BillId? billId = null,
+        DateTime? arrivalDateTime = null
+    )
     {
-        return new Reservation(ReservationId.CreateUnique(), guestCount,
-            reservationStatus,
+        return new Reservation(
             guestId,
-            billId,
+            guestCount,
             arrivalDateTime,
-            DateTime.UtcNow,
-            DateTime.UtcNow);
+            billId,
+            status);
     }
 
     #endregion

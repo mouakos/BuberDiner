@@ -13,66 +13,56 @@ public sealed class Dinner : AggregateRoot<DinnerId>
     #region Private constructors declaration
 
     private Dinner(
-        DinnerId dinnerId,
         string name,
         string description,
         DateTime startDateTime,
         DateTime endDateTime,
-        DateTime? startedDateTime,
-        DateTime? endedDateTime,
-        DinnerStatus status,
         bool isPublic,
-        int maxGuest,
+        int maxGuests,
         Price price,
-        HostId hostId,
         MenuId menuId,
-        string imageUrl,
-        Location location,
-        Reservation reservation,
-        DateTime createdDateTime,
-        DateTime updatedDateTime)
-        : base(dinnerId)
+        HostId hostId,
+        Uri imageUrl,
+        Location location)
+        : base(DinnerId.CreateUnique())
     {
         Name = name;
         Description = description;
         StartDateTime = startDateTime;
         EndDateTime = endDateTime;
-        StartedDateTime = startedDateTime;
-        EndedDateTime = endedDateTime;
-        Status = status;
         IsPublic = isPublic;
-        MaxGuest = maxGuest;
+        MaxGuests = maxGuests;
         Price = price;
-        HostId = hostId;
         MenuId = menuId;
+        HostId = hostId;
         ImageUrl = imageUrl;
         Location = location;
-        Reservation = reservation;
-        CreatedDateTime = createdDateTime;
-        UpdatedDateTime = updatedDateTime;
+        Status = DinnerStatus.Upcoming;
     }
 
     #endregion
 
+    private readonly List<Reservation> m_Reservations = [];
+
     #region Public properties declaration
 
-    public DateTime CreatedDateTime { get; private set; }
     public string Description { get; private set; }
     public DateTime EndDateTime { get; private set; }
-    public DateTime? EndedDateTime { get; private set; }
     public HostId HostId { get; private set; }
-    public string ImageUrl { get; private set; }
+    public Uri ImageUrl { get; private set; }
     public bool IsPublic { get; private set; }
     public Location Location { get; private set; }
-    public int MaxGuest { get; private set; }
+    public int MaxGuests { get; private set; }
     public MenuId MenuId { get; private set; }
     public string Name { get; private set; }
     public Price Price { get; private set; }
-    public Reservation Reservation { get; private set; }
-    public DateTime StartDateTime { get; private set; }
-    public DateTime? StartedDateTime { get; private set; }
+    public IReadOnlyList<Reservation> Reservations => m_Reservations.AsReadOnly();
+    public DateTime? StartDateTime { get; private set; }
     public DinnerStatus Status { get; private set; }
+    public DateTime CreatedDateTime { get; private set; }
     public DateTime UpdatedDateTime { get; private set; }
+    public DateTime? StartedDateTime { get; private set; }
+    public DateTime? EndedDateTime { get; private set; }
 
     #endregion
 
@@ -83,37 +73,27 @@ public sealed class Dinner : AggregateRoot<DinnerId>
         string description,
         DateTime startDateTime,
         DateTime endDateTime,
-        DateTime? startedDateTime,
-        DateTime? endedDateTime,
-        DinnerStatus status,
         bool isPublic,
-        int maxGuest,
+        int maxGuests,
         Price price,
         HostId hostId,
         MenuId menuId,
-        string imageUrl,
-        Location location,
-        Reservation reservation)
+        Uri imageUrl,
+        Location location
+    )
     {
         return new Dinner(
-            DinnerId.CreateUnique(),
             name,
             description,
             startDateTime,
             endDateTime,
-            startedDateTime,
-            endedDateTime,
-            status,
             isPublic,
-            maxGuest,
+            maxGuests,
             price,
-            hostId,
             menuId,
+            hostId,
             imageUrl,
-            location,
-            reservation,
-            DateTime.UtcNow,
-            DateTime.UtcNow
+            location
         );
     }
 

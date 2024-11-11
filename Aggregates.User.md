@@ -1,17 +1,17 @@
-# Domain Models
+# Domain Aggregates
 
 ## User
 
-````csharp
-public class User
+```csharp
+class User
 {
-	// TODO: Add methods
+    // TODO: Add methods
 }
-````
+```
 
-````json
+```json
 {
-   "id": { "value": "00000000-0000-0000-0000-000000000000" },
+    "id": "00000000-0000-0000-0000-000000000000",
     "firstName": "Tiffany",
     "lastName": "Doe",
     "email": "user@gmail.com",
@@ -19,5 +19,3 @@ public class User
     "createdDateTime": "2020-01-01T00:00:00.0000000Z",
     "updatedDateTime": "2020-01-01T00:00:00.0000000Z"
 }
-
-````

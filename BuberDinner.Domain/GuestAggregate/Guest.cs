@@ -1,7 +1,7 @@
 ﻿using BuberDinner.Domain.BillAggregate.ValueObjects;
 using BuberDinner.Domain.Common.Models;
-using BuberDinner.Domain.Common.ValueObjects;
 using BuberDinner.Domain.DinnerAggregate.ValueObjects;
+using BuberDinner.Domain.GuestAggregate.Entities;
 using BuberDinner.Domain.GuestAggregate.ValueObjects;
 using BuberDinner.Domain.MenuReviewAggregate.ValueObjects;
 using BuberDinner.Domain.UserAggregate.ValueObjects;
@@ -16,31 +16,26 @@ public sealed class Guest : AggregateRoot<GuestId>
     private readonly List<MenuReviewId> m_MenuReviewIds = new();
     private readonly List<DinnerId> m_PastDinnerIds = new();
     private readonly List<DinnerId> m_PendingDinnerIds = new();
-    private readonly List<Rating> m_Ratings = new();
     private readonly List<DinnerId> m_UpcomingDinnerIds = new();
+    private readonly List<GuestRating> m_Ratings = new();
 
     #endregion
 
     #region Private constructors declaration
 
     private Guest(
-        GuestId guestId,
         string firstName,
         string lastName,
-        string profilImage,
-        AverageRating averageRating,
+        Uri profileImage,
         UserId userId,
-        DateTime createdDateTime,
-        DateTime updatedDateTime)
-        : base(guestId)
+        GuestRating? guestRating = null,
+        GuestId? guestId = null)
+        : base(GuestId.CreateUnique())
     {
         FirstName = firstName;
         LastName = lastName;
-        ProfilImage = profilImage;
-        AverageRating = averageRating;
+        ProfileImage = profileImage;
         UserId = userId;
-        CreatedDateTime = createdDateTime;
-        UpdatedDateTime = updatedDateTime;
     }
 
     #endregion
@@ -51,37 +46,25 @@ public sealed class Guest : AggregateRoot<GuestId>
     public IReadOnlyList<MenuReviewId> MenuReviewIds => m_MenuReviewIds.AsReadOnly();
     public IReadOnlyList<DinnerId> PastDinnerIds => m_PastDinnerIds.AsReadOnly();
     public IReadOnlyList<DinnerId> PendingDinnerIds => m_PendingDinnerIds.AsReadOnly();
-    public IReadOnlyList<Rating> Ratings => m_Ratings.AsReadOnly();
     public IReadOnlyList<DinnerId> UpcomingDinnerIds => m_UpcomingDinnerIds.AsReadOnly();
-    public AverageRating AverageRating { get; private set; }
-    public DateTime CreatedDateTime { get; private set; }
+    public IReadOnlyList<GuestRating> Ratings => m_Ratings.AsReadOnly();
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
-    public string ProfilImage { get; private set; }
-    public DateTime UpdatedDateTime { get; private set; }
+    public Uri ProfileImage { get; private set; }
     public UserId UserId { get; private set; }
+    public DateTime CreatedDateTime { get; private set; }
+    public DateTime UpdatedDateTime { get; private set; }
 
     #endregion
 
     #region Public methods declaration
 
     public static Guest Create(
-        string firstName,
-        string lastName,
-        string profilImage,
-        AverageRating averageRating,
-        UserId userId
+        string firstName, string lastName, Uri profileImage, UserId userId
     )
     {
         return new Guest(
-            GuestId.CreateUnique(),
-            firstName,
-            lastName,
-            profilImage,
-            averageRating,
-            userId,
-            DateTime.UtcNow,
-            DateTime.UtcNow);
+            firstName, lastName, profileImage, userId);
     }
 
     #endregion
