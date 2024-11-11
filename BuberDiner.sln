@@ -59,6 +59,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "authentication", "authentic
 		Requests\Authentication\register.http = Requests\Authentication\register.http
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{60C2C670-704C-4F04-BBD6-8E591DAD583D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{91804887-F478-43E0-BEAD-14A520F835AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuberDinner.Api.UnitTests", "BuberDinner.Api.UnitTests\BuberDinner.Api.UnitTests.csproj", "{79A325D6-6C0E-49FF-8531-358CC3CD0677}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuberDinner.Application.UnitTests", "BurberDinner.Application.UnitTests\BuberDinner.Application.UnitTests.csproj", "{E92FCD7D-1050-4BA9-9897-78FE71122FF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuberDinner.Domain.UnitTests", "BurberDinner.Domain.UnitTests\BuberDinner.Domain.UnitTests.csproj", "{D298A674-C734-47C0-8C19-5B6CA9C0DEF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuberDinner.Infrastructure.UnitTests", "BurberDinner.Infrastructure.UnitTests\BuberDinner.Infrastructure.UnitTests.csproj", "{37833FC6-D8DE-4395-BB59-FF32899D8B00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +97,22 @@ Global
 		{C894DE62-3926-4039-855B-D76B9D391294}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C894DE62-3926-4039-855B-D76B9D391294}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C894DE62-3926-4039-855B-D76B9D391294}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79A325D6-6C0E-49FF-8531-358CC3CD0677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79A325D6-6C0E-49FF-8531-358CC3CD0677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79A325D6-6C0E-49FF-8531-358CC3CD0677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79A325D6-6C0E-49FF-8531-358CC3CD0677}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E92FCD7D-1050-4BA9-9897-78FE71122FF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E92FCD7D-1050-4BA9-9897-78FE71122FF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E92FCD7D-1050-4BA9-9897-78FE71122FF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E92FCD7D-1050-4BA9-9897-78FE71122FF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D298A674-C734-47C0-8C19-5B6CA9C0DEF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D298A674-C734-47C0-8C19-5B6CA9C0DEF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D298A674-C734-47C0-8C19-5B6CA9C0DEF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D298A674-C734-47C0-8C19-5B6CA9C0DEF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37833FC6-D8DE-4395-BB59-FF32899D8B00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37833FC6-D8DE-4395-BB59-FF32899D8B00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37833FC6-D8DE-4395-BB59-FF32899D8B00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37833FC6-D8DE-4395-BB59-FF32899D8B00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +127,11 @@ Global
 		{7164D99B-5AEE-4E9F-ACE0-A950998FB5A8} = {69678E9F-BDA8-4F22-A001-4974E97AE8DC}
 		{0C3FC7F1-88C4-480A-B82A-E2A6B190F7BD} = {69678E9F-BDA8-4F22-A001-4974E97AE8DC}
 		{5AE481CA-4621-44AF-8BD4-C6D26C086612} = {69678E9F-BDA8-4F22-A001-4974E97AE8DC}
+		{91804887-F478-43E0-BEAD-14A520F835AD} = {60C2C670-704C-4F04-BBD6-8E591DAD583D}
+		{79A325D6-6C0E-49FF-8531-358CC3CD0677} = {91804887-F478-43E0-BEAD-14A520F835AD}
+		{E92FCD7D-1050-4BA9-9897-78FE71122FF9} = {91804887-F478-43E0-BEAD-14A520F835AD}
+		{D298A674-C734-47C0-8C19-5B6CA9C0DEF3} = {91804887-F478-43E0-BEAD-14A520F835AD}
+		{37833FC6-D8DE-4395-BB59-FF32899D8B00} = {91804887-F478-43E0-BEAD-14A520F835AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E95A3B97-4781-4544-B8BA-4B6EC1067F13}
