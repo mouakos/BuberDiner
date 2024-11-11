@@ -60,6 +60,7 @@ namespace BuberDinner.Infrastructure
             {
                 options.UseSqlite("Data Source=BuberDinner.db");
             });
+            services.AddScoped<IDinnerRepository, DinnerRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IMenuRepository, MenuRepository>();
             return services;

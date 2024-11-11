@@ -43,12 +43,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "requests", "requests", "{69
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dinners", "dinners", "{7164D99B-5AEE-4E9F-ACE0-A950998FB5A8}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Requests\Dinners\CreateDinner.http = ..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Requests\Dinners\CreateDinner.http
 		Requests\Dinners\ListDinners.http = Requests\Dinners\ListDinners.http
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "menus", "menus", "{0C3FC7F1-88C4-480A-B82A-E2A6B190F7BD}"
 	ProjectSection(SolutionItems) = preProject
 		Requests\Menus\CreateMenu.http = Requests\Menus\CreateMenu.http
+		..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Requests\Menus\ListMenus.http = ..\..\..\..\Downloads\BuberDinner-Part18-UnitTestStructure\BuberDinner\Requests\Menus\ListMenus.http
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "authentication", "authentication", "{5AE481CA-4621-44AF-8BD4-C6D26C086612}"

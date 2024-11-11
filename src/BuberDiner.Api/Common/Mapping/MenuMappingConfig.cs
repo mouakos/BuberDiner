@@ -1,4 +1,5 @@
 ﻿using BuberDinner.Application.Menus.Commands.CreateMenu;
+using BuberDinner.Application.Menus.Queries.ListMenus;
 using BuberDinner.Contracts.Menus;
 using BuberDinner.Domain.MenuAggregate;
 using Mapster;
@@ -24,6 +25,9 @@ namespace BuberDiner.Api.Common.Mapping
                 .Map(dest => dest.HostId, src => src.HostId.Value)
                 .Map(dest => dest.DinnerIds, src => src.DinnerIds.Select(dinnerId => dinnerId.Value))
                 .Map(dest => dest.ReviewIds, src => src.MenuReviewIds.Select(menuId => menuId.Value));
+
+            config.NewConfig<Guid, ListMenusQuery>()
+                .MapWith(src => new ListMenusQuery(src));
 
             config.NewConfig<MenuSection, MenuSectionResponse>()
                 .Map(dest => dest.Id, src => src.Id.Value);

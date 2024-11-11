@@ -83,13 +83,13 @@ namespace BuberDinner.Domain.DinnerAggregate
             bool isPublic,
             int maxGuests,
             Price price,
-            HostId hostId,
             MenuId menuId,
+            HostId hostId,
             Uri imageUrl,
-            Location location
-        )
+            Location location)
         {
-            return new Dinner(
+            // enforce invariants
+            var dinner = new Dinner(
                 name,
                 description,
                 startDateTime,
@@ -100,8 +100,8 @@ namespace BuberDinner.Domain.DinnerAggregate
                 menuId,
                 hostId,
                 imageUrl,
-                location
-            );
+                location);
+            return dinner;
         }
 
         #endregion
