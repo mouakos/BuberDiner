@@ -1,24 +1,10 @@
 ﻿using BuberDinner.Domain.Common.Models;
+using BuberDinner.Domain.Common.Models.Identities;
 
 namespace BuberDinner.Domain.DinnerAggregate.ValueObjects
 {
-    public class ReservationId : ValueObject
+    public class ReservationId(Guid value) : EntityId<Guid>(value)
     {
-        #region Private constructors declaration
-
-        private ReservationId(Guid value)
-        {
-            Value = value;
-        }
-
-        #endregion
-
-        #region Public properties declaration
-
-        public Guid Value { get; }
-
-        #endregion
-
         #region Public methods declaration
 
         public static ReservationId Create(Guid value)
@@ -29,12 +15,6 @@ namespace BuberDinner.Domain.DinnerAggregate.ValueObjects
         public static ReservationId CreateUnique()
         {
             return new ReservationId(Guid.NewGuid());
-        }
-
-        /// <inheritdoc />
-        public override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Value;
         }
 
         #endregion

@@ -16,11 +16,6 @@ namespace BuberDinner.Domain.BillAggregate.ValueObjects
             return new BillId(Guid.NewGuid());
         }
 
-        public override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Value;
-        }
-
         #endregion
     }
 }

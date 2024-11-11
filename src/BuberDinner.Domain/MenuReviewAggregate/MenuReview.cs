@@ -8,7 +8,7 @@ using BuberDinner.Domain.MenuReviewAggregate.ValueObjects;
 
 namespace BuberDinner.Domain.MenuReviewAggregate
 {
-    public class MenuReview : AggregateRoot<MenuReviewId>
+    public class MenuReview : AggregateRoot<MenuReviewId, Guid>
     {
         #region Private constructors declaration
 

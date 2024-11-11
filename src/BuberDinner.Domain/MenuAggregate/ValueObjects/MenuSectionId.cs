@@ -2,7 +2,7 @@
 
 namespace BuberDinner.Domain.MenuAggregate.ValueObjects
 {
-    public class MenuSectionId(Guid value) : AggregateRootId<Guid>(value)
+    public class MenuSectionId(Guid value) : EntityId<Guid>(value)
     {
         #region Public methods declaration
 
@@ -14,12 +14,6 @@ namespace BuberDinner.Domain.MenuAggregate.ValueObjects
         public static MenuSectionId CreateUnique()
         {
             return new MenuSectionId(Guid.NewGuid());
-        }
-
-        /// <inheritdoc />
-        public override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Value;
         }
 
         #endregion

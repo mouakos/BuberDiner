@@ -6,7 +6,7 @@ using BuberDinner.Domain.HostAggregate.ValueObjects;
 
 namespace BuberDinner.Domain.BillAggregate
 {
-    public class Bill : AggregateRoot<BillId>
+    public class Bill : AggregateRoot<BillId, Guid>
     {
         #region Private constructors declaration
 

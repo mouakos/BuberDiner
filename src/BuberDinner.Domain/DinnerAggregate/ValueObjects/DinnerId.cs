@@ -16,12 +16,6 @@ namespace BuberDinner.Domain.DinnerAggregate.ValueObjects
             return new DinnerId(Guid.NewGuid());
         }
 
-        /// <inheritdoc />
-        public override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Value;
-        }
-
         #endregion
     }
 }
