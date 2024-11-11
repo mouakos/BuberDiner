@@ -7,7 +7,7 @@ using BuberDinner.Domain.UserAggregate.ValueObjects;
 
 namespace BuberDinner.Domain.HostAggregate
 {
-    public sealed class Host : AggregateRoot<HostId>
+    public sealed class Host : AggregateRoot<HostId, Guid>
     {
         #region Private fields declaration
 
