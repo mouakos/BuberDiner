@@ -3,6 +3,7 @@ using BuberDinner.Domain.Common.ValueObjects;
 using BuberDinner.Domain.DinnerAggregate.ValueObjects;
 using BuberDinner.Domain.HostAggregate.ValueObjects;
 using BuberDinner.Domain.MenuAggregate.Entities;
+using BuberDinner.Domain.MenuAggregate.Events;
 using BuberDinner.Domain.MenuAggregate.ValueObjects;
 using BuberDinner.Domain.MenuReviewAggregate.ValueObjects;
 
@@ -62,14 +63,23 @@ namespace BuberDinner.Domain.MenuAggregate
             string description,
             List<MenuSection>? sections = null)
         {
-            return new Menu(
+            var menu = new Menu(
                 hostId,
                 name,
                 description,
                 AverageRating.Create(),
                 sections ?? new List<MenuSection>());
+
+            menu.AddDomainEvent(new MenuCreatedEvent(menu));
+
+            return menu;
         }
 
         #endregion
+
+        public void AddDinnerId(DinnerId dinnerId)
+        {
+            m_DinnerIds.Add(dinnerId);
+        }
     }
 }

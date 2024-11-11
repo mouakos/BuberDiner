@@ -3,6 +3,7 @@ using BuberDinner.Application.Common.Persistence;
 using BuberDinner.Application.Common.Services;
 using BuberDinner.Infrastructure.Authentication;
 using BuberDinner.Infrastructure.Persistence;
+using BuberDinner.Infrastructure.Persistence.Interceptors;
 using BuberDinner.Infrastructure.Persistence.Repositories;
 using BuberDinner.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -60,6 +61,7 @@ namespace BuberDinner.Infrastructure
             {
                 options.UseSqlite("Data Source=BuberDinner.db");
             });
+            services.AddScoped<PublishDomainEventsInterceptor>();
             services.AddScoped<IDinnerRepository, DinnerRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IMenuRepository, MenuRepository>();
