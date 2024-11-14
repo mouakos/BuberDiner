@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\BuberDinner.Application\BuberDinner.Application.csproj" />
+    <ProjectReference Include="..\..\..\src\BuberDinner.Application\BuberDinner.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

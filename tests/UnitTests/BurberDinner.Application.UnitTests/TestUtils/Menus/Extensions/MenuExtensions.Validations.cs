@@ -1,7 +1,6 @@
 using BuberDinner.Application.Menus.Commands.CreateMenu;
 using BuberDinner.Domain.MenuAggregate;
 using BuberDinner.Domain.MenuAggregate.Entities;
-
 using FluentAssertions;
 
 namespace BuberDinner.Application.UnitTests.TestUtils.Menus.Extensions;
@@ -15,7 +14,7 @@ public static partial class MenuExtensions
         menu.Sections.Should().HaveSameCount(command.Sections);
         menu.Sections.Zip(command.Sections).ToList().ForEach(pair => ValidateSection(pair.First, pair.Second));
 
-        static void ValidateSection(MenuSection section, CreateMenuSectionCommand command)
+        static void ValidateSection(MenuSection section, MenuSectionCommand command)
         {
             section.Id.Should().NotBeNull();
             section.Name.Should().Be(command.Name);
@@ -24,7 +23,7 @@ public static partial class MenuExtensions
             section.Items.Zip(command.Items).ToList().ForEach(pair => ValidateItem(pair.First, pair.Second));
         }
 
-        static void ValidateItem(MenuItem item, CreateMenuItemCommand command)
+        static void ValidateItem(MenuItem item, MenuItemCommand command)
         {
             item.Id.Should().NotBeNull();
             item.Name.Should().Be(command.Name);
